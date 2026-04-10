@@ -1,0 +1,58 @@
+<div class="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 px-4 py-12 sm:px-6 lg:px-8">
+  <div class="w-full max-w-md space-y-8">
+    <!-- Header -->
+    <div class="text-center">
+      <div class="mb-4 flex justify-center">
+        <div class="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 shadow-2xl">
+          <span class="text-3xl">📚</span>
+        </div>
+      </div>
+      <h1 class="text-3xl font-bold text-white">BiblioKeep</h1>
+      <p class="mt-2 text-slate-300">Tu biblioteca personal, perfectamente organizada</p>
+    </div>
+
+    <!-- Form Card -->
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate class="space-y-6 rounded-2xl bg-slate-800/50 backdrop-blur-sm border border-slate-700 p-8 shadow-2xl">
+      <!-- Email Field -->
+      <div class="space-y-2">
+        <label for="email" class="block text-sm font-semibold text-white">Correo electrónico</label>
+        <input
+          id="email"
+          formControlName="email"
+          type="email"
+          required
+          class="w-full rounded-lg border border-slate-600 bg-slate-700/50 px-4 py-3 text-white placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:bg-slate-700/50"
+          placeholder="tu@email.com"
+        />
+      </div>
+
+      <!-- Password Field -->
+      <div class="space-y-2">
+        <label for="password" class="block text-sm font-semibold text-white">Contraseña</label>
+        <input
+          id="password"
+          formControlName="password"
+          type="password"
+          required
+          class="w-full rounded-lg border border-slate-600 bg-slate-700/50 px-4 py-3 text-white placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:bg-slate-700/50"
+          placeholder="••••••••"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        [disabled]="form.invalid"
+        class="w-full rounded-lg bg-gradient-to-r from-amber-400 to-orange-500 px-4 py-3 font-semibold text-slate-900 shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+      >
+        Iniciar sesión
+      </button>
+    </form>
+
+    <!-- Footer -->
+    <p class="text-center text-slate-400">
+      ¿No tienes cuenta?
+      <a routerLink="/auth/register" class="font-semibold text-amber-400 hover:text-amber-300">Regístrate aquí</a>
+    </p>
+  </div>
+</div>

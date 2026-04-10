@@ -1,0 +1,23 @@
+<header class="sticky top-0 z-40 border-b border-slate-200 bg-white/80 backdrop-blur-md dark:border-slate-700 dark:bg-slate-900/80">
+  <div class="flex h-16 items-center justify-between px-6">
+    <!-- Logo -->
+    <div class="flex items-center gap-3">
+      <div class="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg">
+        <span class="text-lg font-bold text-white">📚</span>
+      </div>
+      <span class="text-xl font-bold text-slate-900 dark:text-white">BiblioKeep</span>
+    </div>
+
+    <!-- User Menu -->
+    <nav class="flex items-center gap-4">
+      <span class="hidden text-sm text-slate-600 dark:text-slate-300 sm:block">{{ user()?.email }}</span>
+      <button
+        *ngIf="isAuthenticated()"
+        (click)="logout()"
+        class="group relative inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-red-500 to-pink-500 px-4 py-2 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95"
+      >
+        <span>Salir</span>
+      </button>
+    </nav>
+  </div>
+</header>
