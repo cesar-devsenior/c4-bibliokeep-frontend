@@ -21,6 +21,12 @@
     >
       🔄 Actualizar
     </button>
+    <button
+      (click)="navigateToAddBook()"
+      class="rounded-lg bg-gradient-to-r from-green-400 to-blue-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95"
+    >
+      ➕ Nuevo Libro
+    </button>
   </div>
 
   <!-- Loading State -->
@@ -40,8 +46,12 @@
   <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
     <div *ngFor="let book of filtered()" class="group overflow-hidden rounded-xl bg-white shadow-md transition-all hover:shadow-xl hover:-translate-y-1 dark:bg-slate-800">
       <!-- Card Header / Placeholder -->
-      <div class="h-40 bg-gradient-to-br from-amber-300 to-orange-400 flex items-center justify-center text-5xl">
-        📖
+      <div class="h-40 bg-gradient-to-br from-amber-300 to-orange-400 flex items-center justify-center text-5xl overflow-hidden">
+        <img 
+          [src]="book.thumbnail" 
+          [alt]="book.title"
+          class="w-full h-full object-cover object-center"
+        >
       </div>
 
       <!-- Card Body -->

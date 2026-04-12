@@ -1,10 +1,11 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './shared/guards/auth.guard';
+import { authGuard, loginGuard } from './shared/guards/auth.guard';
 
 //Lazy Loading
 export const routes: Routes = [
   {
     path: 'auth',
+    canActivate: [loginGuard],
     children: [
       {
         path: 'login',
@@ -28,7 +29,16 @@ export const routes: Routes = [
       },
       {
         path: 'books',
-        loadComponent: () => import('./features/books/book-list.component').then((m) => m.BookListComponent)
+        children: [
+          {
+            path: '',
+            loadComponent: () => import('./features/books/book-list.component').then((m) => m.BookListComponent)
+          },
+          {
+            path: 'add',
+            loadComponent: () => import('./features/books/book-form.component').then((m) => m.BookFormComponent)
+          },
+        ],
       },
       {
         path: 'loans',

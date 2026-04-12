@@ -1,0 +1,128 @@
+<section class="space-y-6">
+  <!-- Header -->
+  <div class="space-y-2">
+    <h2 class="text-3xl font-bold text-slate-900 dark:text-white">Agregar Nuevo Libro</h2>
+    <p class="text-slate-600 dark:text-slate-300">Completa los detalles para añadir un libro a tu colección</p>
+  </div>
+
+  <form [formGroup]="bookForm" (ngSubmit)="onSubmit()" class="space-y-4">
+    <div>
+      <label for="isbn" class="block text-sm font-medium text-slate-700 dark:text-slate-300">ISBN</label>
+      <input
+        id="isbn"
+        type="text"
+        formControlName="isbn"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-500"
+        placeholder="978-0-123456-78-9"
+      />
+      <div *ngIf="bookForm.get('isbn')?.invalid && bookForm.get('isbn')?.touched" class="text-red-500 text-sm mt-1">
+        ISBN inválido (10 o 13 dígitos).
+      </div>
+    </div>
+
+    <div>
+      <label for="title" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Título</label>
+      <input
+        id="title"
+        type="text"
+        formControlName="title"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-500"
+        placeholder="Título del libro"
+      />
+      <div *ngIf="bookForm.get('title')?.invalid && bookForm.get('title')?.touched" class="text-red-500 text-sm mt-1">
+        Título es requerido.
+      </div>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-slate-700 dark:text-slate-300">Autores</label>
+      <div formArrayName="authors" class="space-y-2">
+        <div *ngFor="let author of authors.controls; let i = index" class="flex items-center space-x-2">
+          <input
+            [formControlName]="i"
+            type="text"
+            class="flex-1 rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-500"
+            placeholder="Nombre del autor"
+          />
+          <button
+            type="button"
+            (click)="removeAuthor(i)"
+            *ngIf="authors.length > 1"
+            class="rounded-lg bg-gradient-to-r from-red-400 to-red-500 px-4 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95"
+          >
+            Remover
+          </button>
+        </div>
+      </div>
+      <button
+        type="button"
+        (click)="addAuthor()"
+        class="mt-2 rounded-lg bg-gradient-to-r from-green-400 to-blue-500 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95"
+      >
+        Agregar Autor
+      </button>
+    </div>
+
+    <div>
+      <label for="description" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Descripción</label>
+      <textarea
+        id="description"
+        formControlName="description"
+        rows="4"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-500"
+        placeholder="Descripción del libro"
+      ></textarea>
+    </div>
+
+    <div>
+      <label for="thumbnail" class="block text-sm font-medium text-slate-700 dark:text-slate-300">URL de Imagen</label>
+      <input
+        id="thumbnail"
+        type="url"
+        formControlName="thumbnail"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-500"
+        placeholder="https://example.com/image.jpg"
+      />
+    </div>
+
+    <div>
+      <label for="status" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Estado</label>
+      <select
+        id="status"
+        formControlName="status"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white"
+      >
+        <option *ngFor="let status of bookStatuses" [value]="status">{{ status }}</option>
+      </select>
+    </div>
+
+    <div>
+      <label for="rating" class="block text-sm font-medium text-slate-700 dark:text-slate-300">Calificación (1-5)</label>
+      <input
+        id="rating"
+        type="number"
+        formControlName="rating"
+        min="1"
+        max="5"
+        class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 transition-all focus:border-amber-400 focus:outline-none focus:ring-2 focus:ring-amber-400/20 dark:border-slate-600 dark:bg-slate-700 dark:text-white dark:placeholder-slate-500"
+      />
+    </div>
+
+    <div class="flex space-x-4">
+      <button
+        type="submit"
+        [disabled]="bookForm.invalid"
+        class="rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95 disabled:opacity-50"
+      >
+        Agregar Libro
+      </button>
+      <button
+        type="button"
+        (click)="cancel()"
+        class="rounded-lg bg-gradient-to-r from-gray-500 to-gray-600 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 active:scale-95"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</section>

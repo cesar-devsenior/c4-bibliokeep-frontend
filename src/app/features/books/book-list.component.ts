@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 import { bookFilterSignal, bookListSignal, bookLoadingSignal, filteredBooks, setBooks, setFilter, setLoadingBooks } from '../../shared/stores/book.store';
 import { BookService } from '../../shared/services/book.service';
 import { authGuard } from '../../shared/guards/auth.guard';
@@ -13,6 +14,7 @@ import { authGuard } from '../../shared/guards/auth.guard';
 })
 export class BookListComponent {
   private bookService = inject(BookService);
+  private router = inject(Router);
 
   loading = bookLoadingSignal;
   filter = bookFilterSignal;
@@ -29,5 +31,9 @@ export class BookListComponent {
       error: () => {},
       complete: () => setLoadingBooks(false),
     });
+  }
+
+  navigateToAddBook() {
+    this.router.navigate(['/books/add']);
   }
 }

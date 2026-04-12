@@ -12,3 +12,14 @@ export const authGuard: CanActivateFn = () => {
   
   return true;
 };
+
+export const loginGuard: CanActivateFn = () => {
+  const router = inject(Router);
+
+  if (isAuthenticatedSignal()) {
+    router.navigateByUrl('/dashboard');
+    return false;
+  }
+  
+  return true;
+};
