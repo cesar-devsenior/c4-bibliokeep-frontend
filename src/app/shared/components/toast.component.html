@@ -1,6 +1,6 @@
 <div class="fixed top-4 right-4 z-50 space-y-2">
+  @for (toast of toasts(); track toast.id) {
   <div
-    *ngFor="let toast of toasts()"
     [ngClass]="getClasses(toast.type)"
     class="animate-in slide-in-from-right-2 fade-in duration-300"
   >
@@ -13,4 +13,5 @@
       ✕
     </button>
   </div>
+  }
 </div>
