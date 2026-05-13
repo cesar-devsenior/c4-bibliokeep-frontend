@@ -79,7 +79,7 @@ export class BookFormComponent {
           book = {
             ...book,
             thumbnail: `${environment.backendUrl}${resp.url}`
-          } as BookPayload;
+          };
 
           this.createBook(book);
         },

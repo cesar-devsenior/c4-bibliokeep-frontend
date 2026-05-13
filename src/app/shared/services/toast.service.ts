@@ -10,7 +10,7 @@ export interface Toast {
   providedIn: 'root'
 })
 export class ToastService {
-  private toastsSignal = signal<Toast[]>([]);
+  private readonly toastsSignal = signal<Toast[]>([]);
 
   get toasts() {
     return this.toastsSignal.asReadonly();
