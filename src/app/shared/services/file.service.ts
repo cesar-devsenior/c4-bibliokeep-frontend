@@ -7,7 +7,7 @@ import { UploadResponse } from "../types/file.types";
 @Injectable({ providedIn: "root" })
 export class FileService {
   private readonly http = inject(HttpClient);
-  private readonly base = `${environment.backendUrl}/api/file`;
+  protected readonly base = `${environment.backendUrl}/api/file`;
 
   upload(file: File | Blob): Observable<UploadResponse> {
     const formData = new FormData();

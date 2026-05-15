@@ -2,9 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { bookFilterSignal, bookListSignal, bookLoadingSignal, filteredBooks, setBooks, setFilter, setLoadingBooks } from '../../shared/stores/book.store';
+import { bookFilterSignal, bookLoadingSignal, filteredBooks, setBooks, setFilter, setLoadingBooks } from '../../shared/stores/book.store';
 import { BookService } from '../../shared/services/book.service';
-import { authGuard } from '../../shared/guards/auth.guard';
 
 @Component({
   selector: 'app-book-list',
@@ -13,8 +12,8 @@ import { authGuard } from '../../shared/guards/auth.guard';
   styleUrl: './book-list.component.css',
 })
 export class BookListComponent {
-  private bookService = inject(BookService);
-  private router = inject(Router);
+  private readonly bookService = inject(BookService);
+  private readonly router = inject(Router);
 
   loading = bookLoadingSignal;
   filter = bookFilterSignal;
